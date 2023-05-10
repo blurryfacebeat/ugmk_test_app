@@ -4,18 +4,5 @@
   "semi": true,
   "trailingComma": "all",
   "singleQuote": true,
-  "jsxSingleQuote": true,
-  "importOrder": [
-    "<THIRD_PARTY_MODULES>",
-    "^@app/(.*)$",
-    "^@common/(.*)$",
-    "^@services/(.*)$",
-    "^@components/(.*)$",
-    "^@modules/(.*)$",
-    "^@pages/(.*)$",
-    "^@utils/(.*)$",
-    "^../(.*)",
-    "^./(.*)",
-    "(.scss)$"
-  ]
+  "jsxSingleQuote": true
 }

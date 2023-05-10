@@ -1,15 +1,30 @@
 import { Options } from 'highcharts';
 
-export const chartSettings: Options = {
-  boost: {
-    enabled: true,
-    useGPUTranslations: true,
+export const chartOptions: Options = {
+  title: {
+    text: '',
   },
-  accessibility: {
-    enabled: false,
+  xAxis: {
+    title: {
+      text: '',
+    },
   },
-  chart: {
-    backgroundColor: undefined,
+  yAxis: {
+    title: {
+      text: '',
+    },
+  },
+  plotOptions: {
+    pie: {
+      cursor: 'pointer',
+      dataLabels: {
+        enabled: false,
+      },
+      showInLegend: true,
+    },
+    column: {
+      cursor: 'pointer',
+    },
   },
   legend: {
     symbolRadius: 0,

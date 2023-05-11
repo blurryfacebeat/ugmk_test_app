@@ -1,14 +1,17 @@
-import { HttpClient } from '../../HttpClient';
-import { IProductItem, IProductsRepository } from './repository.types';
+import {
+  IProductsDataSource,
+  TMappedProducts,
+} from './datasource/products.types';
+import { IProductsRepository } from './repository.types';
 
 export class ProductsRepository implements IProductsRepository {
-  private httpClient: HttpClient;
+  private readonly _dataSource: IProductsDataSource;
 
-  constructor(httpClient: HttpClient) {
-    this.httpClient = httpClient;
+  constructor(dataSource: IProductsDataSource) {
+    this._dataSource = dataSource;
   }
 
-  async getData(): Promise<Array<IProductItem>> {
-    return this.httpClient.get('/products');
+  async getData(): Promise<TMappedProducts> {
+    return this._dataSource.getData();
   }
 }

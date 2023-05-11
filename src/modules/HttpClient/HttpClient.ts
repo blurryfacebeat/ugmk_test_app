@@ -3,7 +3,7 @@ import axios, { AxiosError, AxiosInstance, AxiosResponse } from 'axios';
 import { IHttpOptions } from './HttpClient.types';
 
 export class HttpClient {
-  private _instance: AxiosInstance;
+  private readonly _instance: AxiosInstance;
 
   constructor(options?: IHttpOptions) {
     this._instance = axios.create({

@@ -8,7 +8,7 @@ const BaseChart = (props: HighchartsReact.Props) => {
   const { options, ...otherProps } = props;
 
   const mergedOptions = useMemo(
-    () => ({ ...chartOptions, options }),
+    () => ({ ...chartOptions, ...options }),
     [options],
   );
 

@@ -1,0 +1,13 @@
+.container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 50px;
+}
+
+.chartContainer {
+  padding: 20px;
+
+  border: 1px solid var(--color-main-black);
+  border-radius: 15px;
+}

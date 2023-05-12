@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { ProductsHomeProvider } from '../../modules/Products/presentation/home';
+
 const HomePage = () => {
-  return <div>Home Page</div>;
+  return <ProductsHomeProvider />;
 };
 
 export default HomePage;

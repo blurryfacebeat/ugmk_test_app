@@ -1,0 +1,1 @@
+export { formatFactoryName } from './formatFactoryName';

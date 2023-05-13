@@ -1,16 +1,19 @@
-import { SeriesOptionsType } from 'highcharts';
+import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
+import { SeriesOptionsType, Point } from 'highcharts';
 
 import { PRODUCTS_FILTER_TYPE } from '../../types';
+import { useFilterLocalStorage } from './helpers';
 import { IProductsHomeViewControllerProps } from './ViewController.types';
 
 import ProductsHomeView from './view/View';
-import { useFilterLocalStorage } from './helpers';
 
 const ProductsHomeViewController = (
   props: IProductsHomeViewControllerProps,
 ) => {
   const { viewModel } = props;
+
+  const navigate = useNavigate();
 
   const { setFilterValue, getFilterValue } = useFilterLocalStorage();
 
@@ -20,9 +23,12 @@ const ProductsHomeViewController = (
     keyof typeof PRODUCTS_FILTER_TYPE
   >(getFilterValue() || 'all');
 
+  const handleColumnClick = (factoryId: number, point: Point) =>
+    navigate(`/details/${factoryId}/${point.index + 1}`);
+
   const getDataForChart = (value: keyof typeof PRODUCTS_FILTER_TYPE) =>
     viewModel
-      .getDataForChart(() => console.log('hehehe'), value)
+      .getDataForChart(handleColumnClick, value)
       .then((res) => setChartData(res));
 
   const changeFilter = (newValue: keyof typeof PRODUCTS_FILTER_TYPE) => {

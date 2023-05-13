@@ -6,7 +6,7 @@ import { IChartProps } from './DetailsChart.types';
 
 import BaseChart from '../../../../../../Chart/Chart';
 
-export const HomeChart = (props: IChartProps) => {
+export const DetailsChart = (props: IChartProps) => {
   const { series } = props;
 
   const options: Options = {
@@ -17,4 +17,4 @@ export const HomeChart = (props: IChartProps) => {
   return <BaseChart options={options} />;
 };
 
-export default HomeChart;
+export default DetailsChart;

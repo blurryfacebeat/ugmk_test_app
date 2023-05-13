@@ -1,7 +1,9 @@
 import React from 'react';
 
+import ProductsDetailsProvider from '../../modules/Products/presentation/details/Provider';
+
 const FactoryDetailsPage = () => {
-  return <div>Factory Details Page</div>;
+  return <ProductsDetailsProvider />;
 };
 
 export default FactoryDetailsPage;

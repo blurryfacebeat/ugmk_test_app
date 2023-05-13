@@ -1,11 +1,11 @@
-import { SeriesOptionsType } from 'highcharts';
+import { Point, SeriesOptionsType } from 'highcharts';
 
 import {
   IProductsViewModel,
   IProductsViewModelCases,
   IProductsViewModelProps,
 } from './ViewModel.types';
-import { formatFactoryName } from './helpers';
+import { formatFactoryName } from '../../helpers';
 import { PRODUCTS_FILTER_TYPE } from '../../types';
 import { formatKgToTons } from '../../../../utils';
 
@@ -17,7 +17,7 @@ export class ProductsViewModel implements IProductsViewModel {
   }
 
   async getDataForChart(
-    event: Function,
+    event: (factoryId: number, point: Point) => void,
     type: keyof typeof PRODUCTS_FILTER_TYPE,
   ) {
     const response = await this.getData();
@@ -31,7 +31,7 @@ export class ProductsViewModel implements IProductsViewModel {
         type: 'column',
         name: factoryName,
         events: {
-          click: ({ point }) => event(),
+          click: ({ point }) => event(key, point),
         },
         data: Object.values(value.monthsWeight).map((item) =>
           formatKgToTons(item[type]),

@@ -1,12 +1,13 @@
 import { SeriesOptionsType } from 'highcharts';
 
-import { PRODUCTS_FILTER_TYPE } from '../../types';
 import { formatKgToTons } from '../../../../utils';
 import {
   IProductsDetailsViewModel,
   IProductsDetailsViewModelCases,
   IProductsDetailsViewModelProps,
 } from './ViewModel.types';
+import { PRODUCTS_NAME } from '../../constants/productsName';
+import { formatProductName } from './helpers/formatProductName';
 
 export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   private readonly _cases: IProductsDetailsViewModelCases;
@@ -15,28 +16,33 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
     this._cases = cases;
   }
 
-  async getDataForChart(factoryId: number, monthId: number) {
-    const response = await this.getData();
+  async getDataForChart(
+    factoryId: number,
+    monthId: number,
+  ): Promise<Array<SeriesOptionsType>> {
+    try {
+      const response = await this.getData();
 
-    const chartData: Array<SeriesOptionsType> = [];
+      const factoryMonth = response.get(factoryId)?.monthsWeight[monthId];
 
-    response.forEach((value, key) => {
-      const factoryName = formatFactoryName(key);
+      if (!factoryMonth) throw Error();
 
-      chartData.push({
-        type: 'pie',
-        name: 'Тонн',
-        colorByPoint: true,
-        events: {
-          click: ({ point }) => event(),
+      return [
+        {
+          type: 'pie',
+          name: 'Тонн',
+          colorByPoint: true,
+          data: Object.entries(factoryMonth)
+            .slice(0, 3)
+            .map(([key, value]) => ({
+              name: formatProductName(key as keyof typeof PRODUCTS_NAME),
+              y: formatKgToTons(value),
+            })),
         },
-        data: Object.values(value.monthsWeight).map((item) =>
-          formatKgToTons(item[type]),
-        ),
-      });
-    });
-
-    return chartData;
+      ];
+    } catch (err) {
+      throw err;
+    }
   }
 
   private async getData() {

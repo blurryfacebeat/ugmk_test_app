@@ -1,4 +1,4 @@
-import { SeriesOptionsType } from 'highcharts';
+import { SeriesOptionsType, Point } from 'highcharts';
 
 import { PRODUCTS_FILTER_TYPE } from '../../types';
 import { GetProductsDataCase } from '../../domain/GetProductsDataCase/GetProductsDataCase';
@@ -13,7 +13,7 @@ export interface IProductsViewModelProps {
 
 export interface IProductsViewModel {
   getDataForChart: (
-    event: Function,
+    event: (factoryId: number, point: Point) => void,
     type: keyof typeof PRODUCTS_FILTER_TYPE,
   ) => Promise<Array<SeriesOptionsType>>;
 }

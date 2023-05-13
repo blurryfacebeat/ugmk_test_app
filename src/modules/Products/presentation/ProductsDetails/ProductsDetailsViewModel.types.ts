@@ -1,6 +1,6 @@
 import { SeriesOptionsType } from 'highcharts';
 
-import { GetProductsDataCase } from '../../domain/GetProductsDataCase/GetProductsDataCase';
+import { GetProductsDataCase } from '../../domain';
 
 export interface IProductsDetailsViewModelCases {
   getProductsDataCase: GetProductsDataCase;

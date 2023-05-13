@@ -10,9 +10,10 @@ const BaseSelect = (props: IBaseSelectProps) => {
       onChange={(event) => onChange(event.target.value)}
       name={name}
       {...otherProps}
+      value={selectedValue}
     >
       {options.map(({ value, name }) => (
-        <option key={value} value={value} selected={selectedValue === value}>
+        <option key={value} value={value}>
           {name}
         </option>
       ))}

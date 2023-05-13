@@ -4,3 +4,5 @@ export enum PRODUCTS_FILTER_TYPE {
   product3 = 'product3',
   all = 'all',
 }
+
+export type TProductFilterTypeKeyof = keyof typeof PRODUCTS_FILTER_TYPE;

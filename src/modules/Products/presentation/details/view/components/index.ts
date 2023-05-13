@@ -1,1 +1,0 @@
-export { DetailsChart } from './DetailsChart';

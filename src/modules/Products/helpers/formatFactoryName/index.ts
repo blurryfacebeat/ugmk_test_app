@@ -1,1 +1,1 @@
-export { formatFactoryName } from './formatFactoryName';
+export { formatFactoryName, FACTORY_NAME } from './formatFactoryName';

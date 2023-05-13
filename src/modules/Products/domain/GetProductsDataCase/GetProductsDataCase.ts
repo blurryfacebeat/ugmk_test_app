@@ -1,6 +1,5 @@
-import { IProductsRepository } from '../../data/repository.types';
+import { IProductsRepository, TMappedProducts } from '../../data';
 import { IGetProductsDataCase } from './GetProductsDataCase.types';
-import { TMappedProducts } from '../../data/datasource/products.types';
 
 export class GetProductsDataCase implements IGetProductsDataCase {
   private readonly _repository: IProductsRepository;

@@ -1,0 +1,1 @@
+export { productStorage } from './ProductsStorage';

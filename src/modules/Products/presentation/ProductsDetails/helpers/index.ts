@@ -1,0 +1,1 @@
+export { formatProductName } from './formatProductName';

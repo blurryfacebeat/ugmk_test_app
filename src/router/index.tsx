@@ -13,7 +13,7 @@ const NotFoundPage = lazy(
 const FactoryDetailsPage = lazy(
   () =>
     import(
-      /* webpackChunkName: "FactoryDetailsPage" */ '../pages/FactoryDetailsPage/FactoryDetailsPage'
+      /* webpackChunkName: "ProductsDetailsPage" */ '../pages/ProductsDetailsPage/FactoryDetailsPage'
     ),
 );
 

@@ -1,5 +1,5 @@
+import { IProductsDataSource } from './datasource';
 import { IProductsRepository } from './ProductsRepository.types';
-import { IProductsDataSource, TMappedProducts } from './datasource';
 
 export class ProductsRepository implements IProductsRepository {
   private readonly _dataSource: IProductsDataSource;
@@ -8,7 +8,11 @@ export class ProductsRepository implements IProductsRepository {
     this._dataSource = dataSource;
   }
 
-  async getData(): Promise<TMappedProducts> {
-    return this._dataSource.getData();
+  async getData() {
+    try {
+      return this._dataSource.getData();
+    } catch (error) {
+      throw new Error('Произошла ошибка при загрузке продуктов');
+    }
   }
 }

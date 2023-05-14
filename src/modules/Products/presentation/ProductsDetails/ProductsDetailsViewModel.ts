@@ -23,23 +23,26 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
     try {
       const response = await this.getData();
 
-      const factoryMonth = response.get(factoryId)?.monthsWeight[monthId];
+      const factoryMonth = response?.get(factoryId)?.monthsWeight[monthId];
 
-      if (!factoryMonth) throw Error();
+      if (!factoryMonth)
+        throw new Error('Данных для выбранных месяца и фабрики не существует');
 
-      return [
-        {
-          type: 'pie',
-          name: 'Тонн',
-          colorByPoint: true,
-          data: Object.entries(factoryMonth)
-            .slice(0, 3)
-            .map(([key, value]) => ({
-              name: formatProductName(key as keyof typeof PRODUCTS_NAME),
-              y: formatKgToTons(value),
-            })),
-        },
-      ];
+      return factoryMonth
+        ? [
+            {
+              type: 'pie',
+              name: 'Тонн',
+              colorByPoint: true,
+              data: Object.entries(factoryMonth)
+                .slice(0, 3)
+                .map(([key, value]) => ({
+                  name: formatProductName(key as keyof typeof PRODUCTS_NAME),
+                  y: formatKgToTons(value),
+                })),
+            },
+          ]
+        : [];
     } catch (err) {
       throw err;
     }

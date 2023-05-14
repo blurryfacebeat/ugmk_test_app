@@ -24,7 +24,7 @@ export class ProductsHomeViewModel implements IProductsViewModel {
 
     const chartData: Array<SeriesOptionsType> = [];
 
-    response.forEach((value, key) => {
+    response?.forEach((value, key) => {
       const factoryName = formatFactoryName(key);
 
       chartData.push({

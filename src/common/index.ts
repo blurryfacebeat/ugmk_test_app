@@ -1,2 +1,2 @@
-export { BaseSelect } from './components';
 export type { IBaseSelectOption } from './components';
+export { BaseSelect, ErrorBoundaryWrapper } from './components';

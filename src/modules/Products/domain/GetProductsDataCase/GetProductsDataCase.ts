@@ -1,4 +1,4 @@
-import { IProductsRepository, TMappedProducts } from '../../data';
+import { IProductsRepository } from '../../data';
 import { IGetProductsDataCase } from './GetProductsDataCase.types';
 
 export class GetProductsDataCase implements IGetProductsDataCase {
@@ -8,7 +8,7 @@ export class GetProductsDataCase implements IGetProductsDataCase {
     this._repository = repository;
   }
 
-  async get(): Promise<TMappedProducts> {
+  async get() {
     return this._repository.getData();
   }
 }

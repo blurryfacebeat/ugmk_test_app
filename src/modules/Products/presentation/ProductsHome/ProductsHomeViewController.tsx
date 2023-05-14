@@ -31,6 +31,9 @@ const ProductsHomeViewController = (
     viewModel
       .getDataForChart(handleColumnClick, value)
       .then((res) => setChartData(res))
+      .catch((error) => {
+        throw new Error(error?.message);
+      })
       .finally(() => {
         setIsLoading(false);
       });

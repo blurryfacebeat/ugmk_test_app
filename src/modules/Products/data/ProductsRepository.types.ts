@@ -1,5 +1,5 @@
 import { TMappedProducts } from './datasource';
 
 export interface IProductsRepository {
-  getData: () => Promise<TMappedProducts>;
+  getData: () => Promise<TMappedProducts | undefined>;
 }

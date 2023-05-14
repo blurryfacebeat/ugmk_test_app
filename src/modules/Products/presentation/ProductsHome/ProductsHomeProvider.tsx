@@ -7,6 +7,7 @@ import { ProductsHomeViewModel } from './ProductsHomeViewModel';
 import { ProductsRepository, ProductsDataSource } from '../../data';
 
 import { ProductsHomeViewController } from './index';
+import { ErrorBoundaryWrapper } from '../../../../common';
 
 const viewModel = new ProductsHomeViewModel({
   cases: {
@@ -19,7 +20,11 @@ const viewModel = new ProductsHomeViewModel({
 });
 
 const ProductsHomeProvider = () => {
-  return <ProductsHomeViewController viewModel={viewModel} />;
+  return (
+    <ErrorBoundaryWrapper>
+      <ProductsHomeViewController viewModel={viewModel} />
+    </ErrorBoundaryWrapper>
+  );
 };
 
 export default ProductsHomeProvider;

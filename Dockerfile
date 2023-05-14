@@ -1,6 +1,8 @@
 # pull the base image
 FROM node:16-alpine as builder
 
+ENV REACT_APP_BASE_URL=http://localhost:3001
+
 # set the working direction
 WORKDIR /app
 
@@ -16,7 +18,7 @@ RUN npm run build
 # Bundle static assets with nginx
 FROM nginx:stable-alpine as production
 # Copy built assets from builder
-COPY --from=builder /app/dist /usr/share/nginx/html
+COPY --from=builder /app/build /usr/share/nginx/html
 # Add your nginx.conf
 COPY docker/nginx.conf /etc/nginx/conf.d/default.conf
 # Expose port

@@ -23,12 +23,19 @@ export interface IProductItem {
   product3: TProduct;
 }
 
-export interface IMonthWeightItem {
-  product1: number;
-  product2: number;
-  product3: number;
-  all: number;
+export interface IMonthWeightProduct {
+  kg: number;
+  ton: number;
 }
+
+export interface IMonthWeightItem {
+  product1: IMonthWeightProduct;
+  product2: IMonthWeightProduct;
+  product3: IMonthWeightProduct;
+  all: IMonthWeightProduct;
+}
+
+export type TProductKeyName = 'product1' | 'product2' | 'product3' | 'all';
 
 export type TFactoryMonthWeight = Record<number, IMonthWeightItem>;
 

@@ -39,7 +39,7 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
                 .slice(0, 3)
                 .map(([key, value]) => ({
                   name: formatProductName(key as keyof typeof PRODUCTS_NAME),
-                  y: formatKgToTons(value),
+                  y: value.ton,
                 })),
             },
           ]

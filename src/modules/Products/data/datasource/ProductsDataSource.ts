@@ -4,10 +4,11 @@ import {
   IResponseProductItem,
   TFactoryMonthWeight,
   TMappedProducts,
+  TProductKeyName,
 } from './ProductsDataSource.types';
 import { HttpClient } from '../../../HttpClient';
-import { normalizeDate } from '../../../../utils';
 import { ProductsStorage } from './storage/ProductsStorage';
+import { formatKgToTons, normalizeDate } from '../../../../utils';
 
 export class ProductsDataSource implements IProductsDataSource {
   private readonly _httpClient: HttpClient;
@@ -19,7 +20,8 @@ export class ProductsDataSource implements IProductsDataSource {
   }
 
   async getData() {
-    if (!this._storage.size) await this.fetchJson();
+    if (!this._storage.size || this._storage.isAllItemsEmpty())
+      await this.fetchJson();
 
     return this._storage.data;
   }
@@ -53,30 +55,53 @@ export class ProductsDataSource implements IProductsDataSource {
 
       for (let i = 1; i <= 12; i++) {
         const monthsWeightData: IMonthWeightItem = {
-          product1: 0,
-          product2: 0,
-          product3: 0,
-          all: 0,
+          product1: {
+            kg: 0,
+            ton: 0,
+          },
+          product2: {
+            kg: 0,
+            ton: 0,
+          },
+          product3: {
+            kg: 0,
+            ton: 0,
+          },
+          all: {
+            kg: 0,
+            ton: 0,
+          },
         };
 
         factoryItems.forEach((item) => {
           if (item.date?.id === i) {
             if (typeof item.product1 === 'number') {
-              monthsWeightData.product1 += item.product1;
-              monthsWeightData.all += item.product1;
+              monthsWeightData.product1.kg += item.product1;
+
+              monthsWeightData.all.kg += item.product1;
             }
 
             if (typeof item.product2 === 'number') {
-              monthsWeightData.product2 += item.product2;
-              monthsWeightData.all += item.product2;
+              monthsWeightData.product2.kg += item.product2;
+
+              monthsWeightData.all.kg += item.product2;
             }
 
             if (typeof item.product3 === 'number') {
-              monthsWeightData.product3 += item.product3;
-              monthsWeightData.all += item.product3;
+              monthsWeightData.product3.kg += item.product3;
+
+              monthsWeightData.all.kg += item.product3;
             }
           }
         });
+
+        Object.entries(monthsWeightData).forEach(
+          ([key]: Array<TProductKeyName>) => {
+            monthsWeightData[key].ton = formatKgToTons(
+              monthsWeightData[key].kg,
+            );
+          },
+        );
 
         monthsWeight[i] = monthsWeightData;
       }

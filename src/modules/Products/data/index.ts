@@ -6,6 +6,8 @@ export type {
   IFactoryData,
   TMappedProducts,
   IProductsDataSource,
+  IMonthWeightProduct,
+  TProductKeyName,
 } from './datasource';
 export { ProductsDataSource } from './datasource';
 export { ProductsRepository } from './ProductsRepository';

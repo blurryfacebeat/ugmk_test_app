@@ -22,6 +22,16 @@ export class ProductsStorage {
   get size(): number {
     return this._data.size;
   }
+
+  isAllItemsEmpty() {
+    let result = true;
+
+    this._data.forEach((item) => {
+      if (!!item.items.length) result = false;
+    });
+
+    return result;
+  }
 }
 
 export const productStorage = ProductsStorage.getInstance();

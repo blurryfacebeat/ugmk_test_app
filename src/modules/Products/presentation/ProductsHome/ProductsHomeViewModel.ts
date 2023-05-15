@@ -34,9 +34,7 @@ export class ProductsHomeViewModel implements IProductsViewModel {
           events: {
             click: ({ point }) => event(key, point),
           },
-          data: Object.values(value.monthsWeight).map((item) =>
-            formatKgToTons(item[type]),
-          ),
+          data: Object.values(value.monthsWeight).map((item) => item[type].ton),
         });
       });
 

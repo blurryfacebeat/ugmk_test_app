@@ -1,0 +1,10 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  text-align: center;
+  padding: 40px;
+
+  border: 1px solid var(--color-main-black);
+  border-radius: 15px;
+}

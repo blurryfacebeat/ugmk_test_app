@@ -8,6 +8,8 @@ import {
 import { formatProductName } from './helpers';
 import { PRODUCTS_NAME } from '../../constants';
 import { formatKgToTons } from '../../../../utils';
+import { throwNotFoundMonth, throwProductsNotLoaded } from '../../exceptions';
+import { DefaultError } from '../../../../common';
 
 export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   private readonly _cases: IProductsDetailsViewModelCases;
@@ -19,14 +21,13 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   async getDataForChart(
     factoryId: number,
     monthId: number,
-  ): Promise<Array<SeriesOptionsType>> {
+  ): Promise<Array<SeriesOptionsType> | undefined> {
     try {
       const response = await this.getData();
 
       const factoryMonth = response?.get(factoryId)?.monthsWeight[monthId];
 
-      if (!factoryMonth)
-        throw new Error('Данных для выбранных месяца и фабрики не существует');
+      if (!factoryMonth) throwNotFoundMonth();
 
       return factoryMonth
         ? [
@@ -43,8 +44,12 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
             },
           ]
         : [];
-    } catch (err) {
-      throw err;
+    } catch (error) {
+      if (error instanceof Error) {
+        throw new DefaultError(error?.message);
+      }
+
+      throwProductsNotLoaded();
     }
   }
 

@@ -7,4 +7,10 @@
 
   border: 1px solid var(--color-main-black);
   border-radius: 15px;
+  
+  @media (max-width: 420px) {
+    flex-direction: column;
+
+    text-align: center;
+  }
 }

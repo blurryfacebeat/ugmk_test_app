@@ -21,7 +21,6 @@ const ProductsHomeViewController = (
 
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [chartData, setChartData] = useState<Array<SeriesOptionsType>>([]);
-  // TODO: ЕСЛИ СОХОРАНЕН ПРОДУКТ 2, ТО ИНОГДА ТРОИТ И ПОКАЗЫВАЕТ НЕ ТО ЗНАЧЕНИЕ
   const [filterData, setFilterData] = useState<TProductFilterTypeKeyof>(
     getFilterValue() || 'all',
   );

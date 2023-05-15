@@ -3,6 +3,9 @@ import { useErrorBoundary } from 'react-error-boundary';
 
 import { IErrorBoundaryWrapperFallbackProps } from './ErrorBoundaryWrapperFallback.types';
 
+import styles from './ErrorBoundaryWrapperFallback.module.scss';
+import { BaseButton } from '../../BaseButton';
+
 const ErrorBoundaryWrapperFallback = (
   props: IErrorBoundaryWrapperFallbackProps,
 ) => {
@@ -11,9 +14,9 @@ const ErrorBoundaryWrapperFallback = (
   const { resetBoundary } = useErrorBoundary();
 
   return (
-    <div>
+    <div className={styles.container}>
       <p>{`Ошибка: ${error?.message}`}</p>
-      <button onClick={resetBoundary}>Попробовать заново</button>
+      <BaseButton text={'Попробовать заново'} onClick={resetBoundary} />
     </div>
   );
 };

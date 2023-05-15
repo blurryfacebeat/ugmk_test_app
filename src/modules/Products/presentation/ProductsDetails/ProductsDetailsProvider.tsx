@@ -6,6 +6,7 @@ import { productStorage } from '../../data/datasource';
 import { ProductsRepository, ProductsDataSource } from '../../data';
 import { ProductsDetailsViewModel } from './ProductsDetailsViewModel';
 
+import { ErrorBoundaryWrapper } from '../../../../common';
 import ProductsDetailsViewController from './ProductsDetailsViewController';
 
 const viewModel = new ProductsDetailsViewModel({
@@ -19,7 +20,11 @@ const viewModel = new ProductsDetailsViewModel({
 });
 
 const ProductsDetailsProvider = () => {
-  return <ProductsDetailsViewController viewModel={viewModel} />;
+  return (
+    <ErrorBoundaryWrapper>
+      <ProductsDetailsViewController viewModel={viewModel} />
+    </ErrorBoundaryWrapper>
+  );
 };
 
 export default ProductsDetailsProvider;

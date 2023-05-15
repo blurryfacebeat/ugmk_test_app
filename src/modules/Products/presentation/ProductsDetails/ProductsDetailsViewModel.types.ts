@@ -14,5 +14,5 @@ export interface IProductsDetailsViewModel {
   getDataForChart: (
     factoryId: number,
     monthId: number,
-  ) => Promise<Array<SeriesOptionsType>>;
+  ) => Promise<Array<SeriesOptionsType> | undefined>;
 }

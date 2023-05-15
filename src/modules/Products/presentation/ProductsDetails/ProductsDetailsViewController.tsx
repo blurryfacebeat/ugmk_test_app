@@ -1,6 +1,7 @@
 import { useParams } from 'react-router-dom';
 import { SeriesOptionsType } from 'highcharts';
 import React, { useEffect, useState } from 'react';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import { IProductsDetailsViewControllerProps } from './ProductsDetailsViewController.types';
 
@@ -11,6 +12,8 @@ const ProductsDetailsViewController = (
 ) => {
   const { viewModel } = props;
 
+  const { showBoundary } = useErrorBoundary();
+
   const { factoryId, monthId } = useParams<{
     factoryId: string;
     monthId: string;
@@ -18,10 +21,17 @@ const ProductsDetailsViewController = (
 
   const [chartData, setChartData] = useState<Array<SeriesOptionsType>>([]);
 
-  const getDataForChart = () => {
-    viewModel
-      .getDataForChart(Number(factoryId), Number(monthId))
-      .then((res) => setChartData(res));
+  const getDataForChart = async () => {
+    try {
+      const response = await viewModel.getDataForChart(
+        Number(factoryId),
+        Number(monthId),
+      );
+
+      setChartData(response || []);
+    } catch (error) {
+      showBoundary(error);
+    }
   };
 
   useEffect(() => {

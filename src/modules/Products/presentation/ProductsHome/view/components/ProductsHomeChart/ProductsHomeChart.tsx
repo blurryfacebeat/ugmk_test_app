@@ -1,4 +1,3 @@
-import React from 'react';
 import { Options } from 'highcharts';
 
 import { BaseChart } from '../../../../../../Chart';

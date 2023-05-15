@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IHomeHeaderProps } from './ProductsHomeHeader.types';
 import { selectOptions } from './ProductsHomeHeader.constants';
 

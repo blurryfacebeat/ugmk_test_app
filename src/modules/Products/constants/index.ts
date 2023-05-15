@@ -1,1 +1,1 @@
-export { PRODUCTS_NAME } from './productsName';
+export { PRODUCT_NAME } from './productName';

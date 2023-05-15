@@ -1,6 +1,9 @@
 import { Options } from 'highcharts';
 
 export const chartOptions: Options = {
+  accessibility: {
+    enabled: false,
+  },
   title: {
     text: '',
   },

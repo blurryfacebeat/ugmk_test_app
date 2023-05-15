@@ -1,5 +1,5 @@
+import { useMemo } from 'react';
 import Highcharts from 'highcharts';
-import React, { useMemo } from 'react';
 import HighchartsReact from 'highcharts-react-official';
 
 import { chartOptions } from './options';

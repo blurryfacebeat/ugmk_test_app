@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IBaseButtonProps } from './BaseButton.types';
 
 import styles from './BaseButton.module.scss';

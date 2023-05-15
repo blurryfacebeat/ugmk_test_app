@@ -37,19 +37,22 @@ export class ProductsDataSource implements IProductsDataSource {
   private formatData(data: Array<IResponseProductItem>): TMappedProducts {
     const productsMap: TMappedProducts = new Map();
 
+    const dataWithoutWrongDates = data
+      .map((item) => ({
+        ...item,
+        date: item.date
+          ? {
+              string: normalizeDate(item.date).toISOString(),
+              id: normalizeDate(item.date).getMonth() + 1,
+            }
+          : null,
+      }))
+      .filter((item) => !!item.date);
+
     for (let i = 1; i <= 2; i++) {
-      const factoryItems = data
-        .filter((item) => item.factory_id === i)
-        .map((item) => ({
-          ...item,
-          date: item.date
-            ? {
-                string: normalizeDate(item.date).toISOString(),
-                id: normalizeDate(item.date).getMonth() + 1,
-              }
-            : null,
-        }))
-        .filter((item) => !!item.date);
+      const factoryItems = dataWithoutWrongDates.filter(
+        (item) => item.factory_id === i,
+      );
 
       const monthsWeight: TFactoryMonthWeight = {};
 
@@ -75,19 +78,19 @@ export class ProductsDataSource implements IProductsDataSource {
 
         factoryItems.forEach((item) => {
           if (item.date?.id === i) {
-            if (typeof item.product1 === 'number') {
+            if (item.product2 && typeof item.product1 === 'number') {
               monthsWeightData.product1.kg += item.product1;
 
               monthsWeightData.all.kg += item.product1;
             }
 
-            if (typeof item.product2 === 'number') {
+            if (item.product2 && typeof item.product2 === 'number') {
               monthsWeightData.product2.kg += item.product2;
 
               monthsWeightData.all.kg += item.product2;
             }
 
-            if (typeof item.product3 === 'number') {
+            if (item.product2 && typeof item.product3 === 'number') {
               monthsWeightData.product3.kg += item.product3;
 
               monthsWeightData.all.kg += item.product3;

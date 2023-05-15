@@ -1,6 +1,6 @@
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { SeriesOptionsType } from 'highcharts';
-import React, { useEffect, useState } from 'react';
 import { useErrorBoundary } from 'react-error-boundary';
 
 import { IProductsDetailsViewControllerProps } from './ProductsDetailsViewController.types';

@@ -6,10 +6,9 @@ import {
   IProductsDetailsViewModelProps,
 } from './ProductsDetailsViewModel.types';
 import { formatProductName } from './helpers';
-import { PRODUCTS_NAME } from '../../constants';
-import { formatKgToTons } from '../../../../utils';
-import { throwNotFoundMonth, throwProductsNotLoaded } from '../../exceptions';
+import { PRODUCT_NAME } from '../../constants';
 import { DefaultError } from '../../../../common';
+import { throwNotFoundMonth, throwProductsNotLoaded } from '../../exceptions';
 
 export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   private readonly _cases: IProductsDetailsViewModelCases;
@@ -38,7 +37,7 @@ export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
               data: Object.entries(factoryMonth)
                 .slice(0, 3)
                 .map(([key, value]) => ({
-                  name: formatProductName(key as keyof typeof PRODUCTS_NAME),
+                  name: formatProductName(key as keyof typeof PRODUCT_NAME),
                   y: value.ton,
                 })),
             },

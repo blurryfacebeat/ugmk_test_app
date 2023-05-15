@@ -1,5 +1,1 @@
-export class DefaultError extends Error {
-  constructor(message: string) {
-    super(message);
-  }
-}
+export class DefaultError extends Error {}

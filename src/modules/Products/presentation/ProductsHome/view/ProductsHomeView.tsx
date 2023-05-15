@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IProductsHomeViewProps } from './ProductsHomeView.types';
 
 import { ProductsHomeChart, ProductsHomeHeader } from './components';

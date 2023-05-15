@@ -1,4 +1,4 @@
-import { PRODUCTS_NAME } from '../../../constants';
+import { PRODUCT_NAME } from '../../../constants';
 
-export const formatProductName = (id: keyof typeof PRODUCTS_NAME) =>
-  PRODUCTS_NAME[id];
+export const formatProductName = (id: keyof typeof PRODUCT_NAME) =>
+  PRODUCT_NAME[id];

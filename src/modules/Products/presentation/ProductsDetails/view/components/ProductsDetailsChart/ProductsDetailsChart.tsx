@@ -1,4 +1,3 @@
-import React from 'react';
 import { Options } from 'highcharts';
 
 import { chartOptions } from './ProductsDetailsChart.options';

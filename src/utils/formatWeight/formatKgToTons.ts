@@ -1,1 +1,1 @@
-export const formatKgToTons = (value: number) => value / 1000;
+export const formatKgToTons = (value: number) => Math.round(value / 1000);

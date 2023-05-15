@@ -1,5 +1,5 @@
+import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import React, { useEffect, useState } from 'react';
 import { SeriesOptionsType, Point } from 'highcharts';
 import { useErrorBoundary } from 'react-error-boundary';
 

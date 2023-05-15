@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { AppRoutes } from './router';
 
 import styles from './App.module.scss';

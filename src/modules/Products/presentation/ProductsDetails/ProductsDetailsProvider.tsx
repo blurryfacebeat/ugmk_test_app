@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { GetProductsDataCase } from '../../domain';
 import { BaseHttpClient } from '../../../HttpClient';
 import { productStorage } from '../../data/datasource';

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import { IBaseSelectProps } from './BaseSelect.types';
 
 const BaseSelect = (props: IBaseSelectProps) => {

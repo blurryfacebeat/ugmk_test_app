@@ -7,6 +7,7 @@ import { useFilterLocalStorage } from './helpers';
 import { TProductFilterTypeKeyof } from '../../types';
 import { IProductsHomeViewControllerProps } from './ProductsHomeViewController.types';
 
+import { TwoToneLoader } from '../../../../common';
 import ProductsHomeView from './view/ProductsHomeView';
 
 const ProductsHomeViewController = (
@@ -65,7 +66,7 @@ const ProductsHomeViewController = (
           chartData={chartData}
         />
       ) : (
-        <div>Loading...</div>
+        <TwoToneLoader />
       )}
     </>
   );

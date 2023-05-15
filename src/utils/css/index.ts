@@ -1,1 +1,0 @@
-export { getCssVar } from './getCssVar';

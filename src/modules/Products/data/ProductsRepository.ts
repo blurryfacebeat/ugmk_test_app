@@ -9,10 +9,6 @@ export class ProductsRepository implements IProductsRepository {
   }
 
   async getData() {
-    try {
-      return this._dataSource.getData();
-    } catch (error) {
-      throw new Error('Произошла ошибка при загрузке продуктов');
-    }
+    return this._dataSource.getData();
   }
 }

@@ -15,5 +15,5 @@ export interface IProductsViewModel {
   getDataForChart: (
     event: (factoryId: number, point: Point) => void,
     type: TProductFilterTypeKeyof,
-  ) => Promise<Array<SeriesOptionsType>>;
+  ) => Promise<Array<SeriesOptionsType> | undefined>;
 }

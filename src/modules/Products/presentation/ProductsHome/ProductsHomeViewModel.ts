@@ -20,26 +20,30 @@ export class ProductsHomeViewModel implements IProductsViewModel {
     event: (factoryId: number, point: Point) => void,
     type: TProductFilterTypeKeyof,
   ) {
-    const response = await this.getData();
+    try {
+      const response = await this.getData();
 
-    const chartData: Array<SeriesOptionsType> = [];
+      const chartData: Array<SeriesOptionsType> = [];
 
-    response?.forEach((value, key) => {
-      const factoryName = formatFactoryName(key);
+      response?.forEach((value, key) => {
+        const factoryName = formatFactoryName(key);
 
-      chartData.push({
-        type: 'column',
-        name: factoryName,
-        events: {
-          click: ({ point }) => event(key, point),
-        },
-        data: Object.values(value.monthsWeight).map((item) =>
-          formatKgToTons(item[type]),
-        ),
+        chartData.push({
+          type: 'column',
+          name: factoryName,
+          events: {
+            click: ({ point }) => event(key, point),
+          },
+          data: Object.values(value.monthsWeight).map((item) =>
+            formatKgToTons(item[type]),
+          ),
+        });
       });
-    });
 
-    return chartData;
+      return chartData;
+    } catch (error) {
+      throw new Error('Произошла ошибка при загрузке продуктов');
+    }
   }
 
   private async getData() {

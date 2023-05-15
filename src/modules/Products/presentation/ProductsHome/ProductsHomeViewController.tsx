@@ -1,6 +1,7 @@
 import { useNavigate } from 'react-router-dom';
 import React, { useEffect, useState } from 'react';
 import { SeriesOptionsType, Point } from 'highcharts';
+import { useErrorBoundary } from 'react-error-boundary';
 
 import { useFilterLocalStorage } from './helpers';
 import { TProductFilterTypeKeyof } from '../../types';
@@ -13,6 +14,7 @@ const ProductsHomeViewController = (
 ) => {
   const { viewModel } = props;
 
+  const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
 
   const { setFilterValue, getFilterValue } = useFilterLocalStorage();
@@ -27,16 +29,20 @@ const ProductsHomeViewController = (
   const handleColumnClick = (factoryId: number, point: Point) =>
     navigate(`/details/${factoryId}/${point.index + 1}`);
 
-  const getDataForChart = (value: TProductFilterTypeKeyof) =>
-    viewModel
-      .getDataForChart(handleColumnClick, value)
-      .then((res) => setChartData(res))
-      .catch((error) => {
-        throw new Error(error?.message);
-      })
-      .finally(() => {
-        setIsLoading(false);
-      });
+  const getDataForChart = async (value: TProductFilterTypeKeyof) => {
+    try {
+      const response = await viewModel.getDataForChart(
+        handleColumnClick,
+        value,
+      );
+
+      setChartData(response);
+    } catch (error) {
+      showBoundary(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const changeFilter = (newValue: TProductFilterTypeKeyof) => {
     setFilterData(newValue);

@@ -1,1 +1,1 @@
-export { useFilterLocalStorage } from './useFilterLocalStorage';
+export { filterLocalStorageUtil } from './filterLocalStorageUtil';

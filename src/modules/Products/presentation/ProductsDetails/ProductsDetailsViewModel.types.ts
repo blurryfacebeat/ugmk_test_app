@@ -1,5 +1,3 @@
-import { SeriesOptionsType } from 'highcharts';
-
 import { GetProductsDataCase } from '../../domain';
 
 export interface IProductsDetailsViewModelCases {
@@ -11,8 +9,5 @@ export interface IProductsDetailsViewModelProps {
 }
 
 export interface IProductsDetailsViewModel {
-  getDataForChart: (
-    factoryId: number,
-    monthId: number,
-  ) => Promise<Array<SeriesOptionsType> | undefined>;
+  fetchDataForChart: (factoryId: number, monthId: number) => void;
 }

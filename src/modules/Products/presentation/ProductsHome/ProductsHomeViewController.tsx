@@ -1,9 +1,9 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { Point } from 'highcharts';
+import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
-import { SeriesOptionsType, Point } from 'highcharts';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import { useFilterLocalStorage } from './helpers';
 import { TProductFilterTypeKeyof } from '../../types';
 import { IProductsHomeViewControllerProps } from './ProductsHomeViewController.types';
 
@@ -18,52 +18,36 @@ const ProductsHomeViewController = (
   const { showBoundary } = useErrorBoundary();
   const navigate = useNavigate();
 
-  const { setFilterValue, getFilterValue } = useFilterLocalStorage();
-
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [chartData, setChartData] = useState<Array<SeriesOptionsType>>([]);
-  const [filterData, setFilterData] = useState<TProductFilterTypeKeyof>(
-    getFilterValue() || 'all',
-  );
-
   const handleColumnClick = (factoryId: number, point: Point) =>
     navigate(`/details/${factoryId}/${point.index + 1}`);
 
-  const getDataForChart = async (value: TProductFilterTypeKeyof) => {
+  const getDataForChart = async () => {
     try {
-      const response = await viewModel.getDataForChart(
-        handleColumnClick,
-        value,
-      );
-
-      setChartData(response);
+      await viewModel.fetchDataForChart(handleColumnClick);
     } catch (error) {
       showBoundary(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
   const changeFilter = (newValue: TProductFilterTypeKeyof) => {
-    setFilterData(newValue);
-    setFilterValue(newValue);
+    viewModel.changeFilter(newValue);
 
-    getDataForChart(newValue);
+    getDataForChart();
   };
 
   useEffect(() => {
-    getDataForChart(filterData);
+    getDataForChart();
   }, []);
 
   return (
     <>
-      {!isLoading ? (
+      {!viewModel.isLoading ? (
         <ProductsHomeView
           onSelectChange={(value) =>
             changeFilter(value as TProductFilterTypeKeyof)
           }
-          selectedValue={filterData}
-          chartData={chartData}
+          selectedValue={viewModel.filterData}
+          chartData={viewModel.chartData}
         />
       ) : (
         <TwoToneLoader />
@@ -72,4 +56,4 @@ const ProductsHomeViewController = (
   );
 };
 
-export default ProductsHomeViewController;
+export default observer(ProductsHomeViewController);

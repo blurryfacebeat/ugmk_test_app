@@ -1,4 +1,5 @@
 import { SeriesOptionsType } from 'highcharts';
+import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
   IProductsDetailsViewModel,
@@ -12,44 +13,58 @@ import { throwNotFoundMonth, throwProductsNotLoaded } from '../../exceptions';
 
 export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   private readonly _cases: IProductsDetailsViewModelCases;
+  private _isLoading: boolean = false;
+  private _chartData: Array<SeriesOptionsType> = [];
 
   constructor({ cases }: IProductsDetailsViewModelProps) {
     this._cases = cases;
+
+    makeAutoObservable(this);
   }
 
-  async getDataForChart(
-    factoryId: number,
-    monthId: number,
-  ): Promise<Array<SeriesOptionsType> | undefined> {
+  async fetchDataForChart(factoryId: number, monthId: number) {
     try {
+      runInAction(() => (this._isLoading = true));
+
       const response = await this.getData();
 
       const factoryMonth = response?.get(factoryId)?.monthsWeight[monthId];
 
       if (!factoryMonth) throwNotFoundMonth();
 
-      return factoryMonth
-        ? [
-            {
-              type: 'pie',
-              name: 'Тонн',
-              colorByPoint: true,
-              data: Object.entries(factoryMonth)
-                .slice(0, 3)
-                .map(([key, value]) => ({
-                  name: formatProductName(key as keyof typeof PRODUCT_NAME),
-                  y: value.ton,
-                })),
-            },
-          ]
-        : [];
+      runInAction(
+        () =>
+          (this._chartData = factoryMonth
+            ? [
+                {
+                  type: 'pie',
+                  name: 'Тонн',
+                  colorByPoint: true,
+                  data: Object.entries(factoryMonth)
+                    .slice(0, 3)
+                    .map(([key, value]) => ({
+                      name: formatProductName(key as keyof typeof PRODUCT_NAME),
+                      y: value.ton,
+                    })),
+                },
+              ]
+            : []),
+      );
     } catch (error) {
-      if (error instanceof Error) {
-        throw new DefaultError(error?.message);
-      }
+      if (error instanceof Error) throw new DefaultError(error?.message);
 
       throwProductsNotLoaded();
+    } finally {
+      runInAction(() => (this._isLoading = false));
     }
+  }
+
+  get chartData() {
+    return this._chartData;
+  }
+
+  get isLoading() {
+    return this._isLoading;
   }
 
   private async getData() {

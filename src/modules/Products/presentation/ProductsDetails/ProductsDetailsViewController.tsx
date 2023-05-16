@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
+import { observer } from 'mobx-react-lite';
 import { useParams } from 'react-router-dom';
-import { SeriesOptionsType } from 'highcharts';
 import { useErrorBoundary } from 'react-error-boundary';
 
 import { IProductsDetailsViewControllerProps } from './ProductsDetailsViewController.types';
@@ -20,21 +20,11 @@ const ProductsDetailsViewController = (
     monthId: string;
   }>();
 
-  const [isLoading, setIsLoading] = useState<boolean>(true);
-  const [chartData, setChartData] = useState<Array<SeriesOptionsType>>([]);
-
   const getDataForChart = async () => {
     try {
-      const response = await viewModel.getDataForChart(
-        Number(factoryId),
-        Number(monthId),
-      );
-
-      setChartData(response || []);
+      await viewModel.fetchDataForChart(Number(factoryId), Number(monthId));
     } catch (error) {
       showBoundary(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -44,11 +34,11 @@ const ProductsDetailsViewController = (
 
   return (
     <>
-      {!isLoading ? (
+      {!viewModel.isLoading ? (
         <ProductsDetailsView
           factoryId={Number(factoryId) || null}
           monthId={Number(monthId) || null}
-          chartData={chartData}
+          chartData={viewModel.chartData}
         />
       ) : (
         <TwoToneLoader />
@@ -57,4 +47,4 @@ const ProductsDetailsViewController = (
   );
 };
 
-export default ProductsDetailsViewController;
+export default observer(ProductsDetailsViewController);

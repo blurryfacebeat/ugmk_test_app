@@ -1,4 +1,4 @@
-import { DefaultError } from '../../../common';
+import { DefaultError } from 'src/common';
 
 class NotFoundMonthException extends DefaultError {}
 

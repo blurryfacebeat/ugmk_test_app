@@ -1,4 +1,4 @@
-import { IProductsRepository } from '../../data';
+import { IProductsRepository } from 'src/modules/Products/data';
 import { IGetProductsDataCase } from './GetProductsDataCase.types';
 
 export class GetProductsDataCase implements IGetProductsDataCase {

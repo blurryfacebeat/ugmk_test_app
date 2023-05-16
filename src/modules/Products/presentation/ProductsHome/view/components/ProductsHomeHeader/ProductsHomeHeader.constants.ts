@@ -1,6 +1,6 @@
-import { PRODUCT_NAME } from '../../../../../constants';
-import { PRODUCTS_FILTER_TYPE } from '../../../../../types';
-import { IBaseSelectOption } from '../../../../../../../common';
+import { IBaseSelectOption } from 'src/common';
+import { PRODUCT_NAME } from 'src/modules/Products/constants';
+import { PRODUCTS_FILTER_TYPE } from 'src/modules/Products/types';
 
 export const selectOptions: Array<IBaseSelectOption> = [
   {

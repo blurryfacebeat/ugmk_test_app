@@ -4,10 +4,10 @@ import { observer } from 'mobx-react-lite';
 import { useNavigate } from 'react-router-dom';
 import { useErrorBoundary } from 'react-error-boundary';
 
-import { TProductFilterTypeKeyof } from '../../types';
+import { TProductFilterTypeKeyof } from 'src/modules/Products/types';
 import { IProductsHomeViewControllerProps } from './ProductsHomeViewController.types';
 
-import { TwoToneLoader } from '../../../../common';
+import { TwoToneLoader } from 'src/common';
 import ProductsHomeView from './view/ProductsHomeView';
 
 const ProductsHomeViewController = (

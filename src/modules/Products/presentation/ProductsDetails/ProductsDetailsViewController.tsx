@@ -5,7 +5,7 @@ import { useErrorBoundary } from 'react-error-boundary';
 
 import { IProductsDetailsViewControllerProps } from './ProductsDetailsViewController.types';
 
-import { TwoToneLoader } from '../../../../common';
+import { TwoToneLoader } from 'src/common';
 import ProductsDetailsView from './view/ProductsDetailsView';
 
 const ProductsDetailsViewController = (

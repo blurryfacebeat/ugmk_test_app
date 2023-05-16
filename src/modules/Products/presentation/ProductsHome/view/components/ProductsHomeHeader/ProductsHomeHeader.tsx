@@ -1,7 +1,7 @@
 import { IHomeHeaderProps } from './ProductsHomeHeader.types';
 import { selectOptions } from './ProductsHomeHeader.constants';
 
-import { BaseSelect } from '../../../../../../../common';
+import { BaseSelect } from 'src/common';
 
 import styles from './ProductsHomeHeader.module.scss';
 

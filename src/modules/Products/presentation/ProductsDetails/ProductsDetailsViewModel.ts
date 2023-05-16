@@ -2,14 +2,17 @@ import { SeriesOptionsType } from 'highcharts';
 import { makeAutoObservable, runInAction } from 'mobx';
 
 import {
+  throwNotFoundMonth,
+  throwProductsNotLoaded,
+} from 'src/modules/Products/exceptions';
+import {
   IProductsDetailsViewModel,
   IProductsDetailsViewModelCases,
   IProductsDetailsViewModelProps,
 } from './ProductsDetailsViewModel.types';
+import { DefaultError } from 'src/common';
 import { formatProductName } from './helpers';
-import { PRODUCT_NAME } from '../../constants';
-import { DefaultError } from '../../../../common';
-import { throwNotFoundMonth, throwProductsNotLoaded } from '../../exceptions';
+import { PRODUCT_NAME } from 'src/modules/Products/constants';
 
 export class ProductsDetailsViewModel implements IProductsDetailsViewModel {
   private readonly _cases: IProductsDetailsViewModelCases;

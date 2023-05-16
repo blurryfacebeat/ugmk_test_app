@@ -1,4 +1,7 @@
-import { PRODUCTS_FILTER_TYPE, TProductFilterTypeKeyof } from '../../../types';
+import {
+  PRODUCTS_FILTER_TYPE,
+  TProductFilterTypeKeyof,
+} from 'src/modules/Products/types';
 
 export const filterLocalStorageUtil = () => {
   const setFilterValue = (value: TProductFilterTypeKeyof) =>

@@ -6,9 +6,9 @@ import {
   TMappedProducts,
   TProductKeyName,
 } from './ProductsDataSource.types';
-import { HttpClient } from '../../../HttpClient';
+import { HttpClient } from 'src/modules/HttpClient';
+import { formatKgToTons, normalizeDate } from 'src/utils';
 import { ProductsStorage } from './storage/ProductsStorage';
-import { formatKgToTons, normalizeDate } from '../../../../utils';
 
 export class ProductsDataSource implements IProductsDataSource {
   private readonly _httpClient: HttpClient;

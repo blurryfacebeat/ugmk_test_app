@@ -1,4 +1,4 @@
-import { GetProductsDataCase } from '../../domain';
+import { GetProductsDataCase } from 'src/modules/Products/domain';
 
 export interface IProductsDetailsViewModelCases {
   getProductsDataCase: GetProductsDataCase;

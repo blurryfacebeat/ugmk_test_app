@@ -3,7 +3,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { IErrorBoundaryWrapperFallbackProps } from './ErrorBoundaryWrapperFallback.types';
 
-import { BaseButton } from '../../BaseButton';
+import { BaseButton } from 'src/common';
 
 import styles from './ErrorBoundaryWrapperFallback.module.scss';
 

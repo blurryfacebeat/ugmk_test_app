@@ -1,4 +1,4 @@
-import { ProductsDetailsProvider } from '../../modules/Products';
+import { ProductsDetailsProvider } from 'src/modules/Products';
 
 const FactoryDetailsPage = () => {
   return <ProductsDetailsProvider />;

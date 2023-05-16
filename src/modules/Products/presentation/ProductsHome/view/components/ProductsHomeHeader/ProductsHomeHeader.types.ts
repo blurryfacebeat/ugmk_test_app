@@ -1,4 +1,4 @@
-import { TProductFilterTypeKeyof } from '../../../../../types';
+import { TProductFilterTypeKeyof } from 'src/modules/Products/types';
 
 export interface IHomeHeaderProps {
   selectedValue: TProductFilterTypeKeyof;

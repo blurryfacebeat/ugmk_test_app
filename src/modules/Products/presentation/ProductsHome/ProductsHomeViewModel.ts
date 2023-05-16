@@ -6,9 +6,9 @@ import {
   IProductsViewModelCases,
   IProductsViewModelProps,
 } from './ProductsHomeViewModel.types';
-import { formatFactoryName } from '../../helpers';
 import { filterLocalStorageUtil } from './helpers';
-import { TProductFilterTypeKeyof } from '../../types';
+import { formatFactoryName } from 'src/modules/Products/helpers';
+import { TProductFilterTypeKeyof } from 'src/modules/Products/types';
 
 export class ProductsHomeViewModel implements IProductsViewModel {
   private readonly _cases: IProductsViewModelCases;

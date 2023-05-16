@@ -1,8 +1,9 @@
 import { Options } from 'highcharts';
 
-import { BaseChart } from '../../../../../../Chart';
 import { chartOptions } from './ProductsHomeChart.options';
 import { IProductsHomeChartProps } from './ProductsHomeChart.types';
+
+import { BaseChart } from 'src/modules/Chart';
 
 export const ProductsHomeChart = (props: IProductsHomeChartProps) => {
   const { series } = props;

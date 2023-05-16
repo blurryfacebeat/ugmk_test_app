@@ -1,4 +1,4 @@
-import { ProductsHomeProvider } from '../../modules/Products';
+import { ProductsHomeProvider } from 'src/modules/Products';
 
 const HomePage = () => {
   return <ProductsHomeProvider />;

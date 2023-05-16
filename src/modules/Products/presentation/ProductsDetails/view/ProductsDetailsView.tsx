@@ -1,8 +1,8 @@
 import { useNavigate } from 'react-router-dom';
 
-import { BaseButton } from '../../../../../common';
-import { getMonthName } from '../../../../../utils';
-import { formatFactoryName } from '../../../helpers';
+import { BaseButton } from 'src/common';
+import { getMonthName } from 'src/utils';
+import { formatFactoryName } from 'src/modules/Products/helpers';
 import { IProductsDetailsViewProps } from './ProductsDetailsView.types';
 
 import { ProductsDetailsChart } from './components';
